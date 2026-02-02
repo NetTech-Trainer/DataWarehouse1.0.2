@@ -1,0 +1,23 @@
+# Build folders
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Packages
+*.nupkg
+*.NuGet/
+
+# EF Core Migrations (optional)
+**/Migrations/
+
+# Logs
+*.log
+
+# Rider IDE
+.idea/
