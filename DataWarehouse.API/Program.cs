@@ -3,9 +3,9 @@ using DataWarehouse.API.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Add services
 builder.Services.AddControllers();
+
 // Swagger services
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -19,30 +19,20 @@ builder.Services.AddSwaggerGen(c =>
 
 // Register infrastructure
 builder.Services.AddInfrastructure(builder.Configuration);
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-//builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//    app.MapOpenApi();
-//}
-// Swagger middleware
-if (app.Environment.IsDevelopment())
+/* ✅ ENABLE SWAGGER ALWAYS */
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "DataWarehouse API v1");
-        c.RoutePrefix = string.Empty; // optional: serve Swagger at /
-    });
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "DataWarehouse API v1");
+    c.RoutePrefix = string.Empty; // Swagger at root (/)
+});
+
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
+
